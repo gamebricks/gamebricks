@@ -1,5 +1,5 @@
 gameboard
 =========
 
-The base for creating games for the web
-Gameboardprovides  loops and preloader.
+The base for creating games for the web.  
+Gameboard provides loops and preloader.
