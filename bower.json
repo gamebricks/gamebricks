@@ -26,5 +26,9 @@
     "udefine": "~0.8.8",
     "mixedice": "~0.5.1",
     "animframe": "~1.1.4"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "chai": "~1.8.1"
   }
 }
