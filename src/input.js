@@ -6,12 +6,18 @@ udefine(['root', 'eventmap', 'gameboard/key'], function(root, EventMap, Key) {
   Input.key = new EventMap();
 
   root.addEventListener('keydown', function(evt) {
-    Input.key.trigger('down', evt.keyCode);
+    Input.key.trigger({
+      name: 'down',
+      context: Key
+    }, evt.keyCode);
   }, true);
+  
   root.addEventListener('keyup', function(evt) {
-    Input.key.trigger('up', evt.keyCode);
+    Input.key.trigger({
+      name: 'up',
+      context: Key
+    }, evt.keyCode);
   }, true);
 
   return Input;
-
-}); 
+});
