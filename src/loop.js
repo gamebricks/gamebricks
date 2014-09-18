@@ -72,7 +72,7 @@ udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, E
     };
 
     var pause = function(taskName) {
-      pausedEvents[taskName].paused = true;
+      pausedEvents[taskName] = true;
     };
 
     var resume = function(taskName) {
@@ -81,7 +81,7 @@ udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, E
         return;
       }
       
-      pausedEvents[taskName].paused = false;
+      pausedEvents[taskName] = false;
     };
 
 
