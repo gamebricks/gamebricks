@@ -1,4 +1,4 @@
-define(function() {
+udefine(function() {
   'use strict';
   
   var Key = {
