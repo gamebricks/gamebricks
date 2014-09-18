@@ -1,14 +1,28 @@
-udefine('gameboard/input', ['eventmap', 'gameboard/key'], function(EventMap, Key) {
-  
+udefine('gameboard/input', ['root', 'eventmap', 'gameboard/key'], function(root, EventMap, Key) {
+
   var Input = {};
-  
+
   Input.define = Key.define;
   Input.key = new EventMap();
+
+  root.addEventListener('keydown', function(evt) {
+    Input.key.trigger({
+      name: 'down',
+      context: Key
+    }, evt.keyCode);
+  }, true);
   
+  root.addEventListener('keyup', function(evt) {
+    Input.key.trigger({
+      name: 'up',
+      context: Key
+    }, evt.keyCode);
+  }, true);
+
   return Input;
-  
 });
-define('gameboard/key', function() {
+
+udefine('gameboard/key', function() {
   'use strict';
   
   var Key = {
@@ -188,7 +202,7 @@ udefine('gameboard/loop', ['requestanimationframe', 'eventmap'], function(reques
     };
 
     var pause = function(taskName) {
-      pausedEvents[taskName].paused = true;
+      pausedEvents[taskName] = true;
     };
 
     var resume = function(taskName) {
@@ -197,7 +211,7 @@ udefine('gameboard/loop', ['requestanimationframe', 'eventmap'], function(reques
         return;
       }
       
-      pausedEvents[taskName].paused = false;
+      pausedEvents[taskName] = false;
     };
 
 
@@ -217,6 +231,59 @@ udefine('gameboard/loop', ['requestanimationframe', 'eventmap'], function(reques
   
 });
 
+udefine('clamp', function() {
+  'use strict';
+  
+  var clamp = function(value, min, max) {
+    var _ref, _ref1, _ref2;
+    if ( typeof value === 'object') {
+      _ref = value, min = _ref.min, max = _ref.max, value = _ref.value;
+    }
+    if (Array.isArray(min)) {
+      _ref1 = min, min = _ref1[0], max = _ref1[1];
+    }
+    if (min == null) {
+      min = 0.0;
+    }
+    if (max == null) {
+      max = 1.0;
+    }
+    if (min > max) {
+      _ref2 = [max, min], min = _ref2[0], max = _ref2[1];
+    }
+    if ((min <= value && value <= max)) {
+      return value;
+    } else {
+      if (value > max) {
+        return max;
+      } else {
+        return min;
+      }
+    }
+  };
+
+  return clamp;
+});
+
+udefine('inverselerp', ['lerp'], function(lerp) {
+	return function(min, max, amt) {
+		return max - lerp(min, max, amt);
+	};
+});
+
+udefine('lerp', ['clamp'], function(clamp) {
+	return function(min, max, amt) {
+    var tmpAmt = clamp(amt, 0.0, 1.0);
+    var diff = Math.abs(max - min);
+    
+    if (diff === 0) {
+    	return min;
+    } else {
+    	return min + (diff * tmpAmt);
+    }
+	};
+});
+
 udefine('gameboard/preloader', ['eventmap', 'mixedice'], function(EventMap, mixedice) {
   
   var Preloader = (function() {
@@ -228,5 +295,27 @@ udefine('gameboard/preloader', ['eventmap', 'mixedice'], function(EventMap, mixe
   })();
   
   return Preloader;
+  
+});
+udefine('gameboard/tween', function() {
+  
+  var Tween = (function() {
+    
+    var Tween = function() {
+      this.target = null;
+    };
+    
+    Tween.prototype.animate = function(property, end, time) {
+      if (this.target && typeof this.target[property] === 'number') {
+      	var start = this.target[property];
+      	
+      	var animateId = 'animate-' + Date.now();
+      	
+      	
+      }
+    };
+  })();
+  
+  return Tween;
   
 });
