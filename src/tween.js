@@ -1,4 +1,4 @@
-udefine(['bezier-easing', 'gameboard/loop'], function(BezierEasing, Loop) {
+udefine(['gameboard/bezier-easing', 'gameboard/loop'], function(BezierEasing, Loop) {
 
   var Tween = function() {
     this.target = null;
