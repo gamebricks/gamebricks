@@ -74,48 +74,45 @@ udefine(['root', 'eventmap', 'mixedice', './log'], function(root, EventMap, mixe
       Object.keys(this.assets).forEach(function(key) {
         var value = this.assets[key];
 
-                  if (value.files == null || !Array.isArray(value.files) || value.files.length === 0) {
-            return true;
-          }
-          
-          self.maxAssets += value.files.length;
+        if (value.files == null || !Array.isArray(value.files) || value.files.length === 0) {
+          return true;
+        }
 
-          for (var i = 0, j = value.files.length; i < j; i++) {
-            (function(iterator) {
-              // Handle images here
-              if (iterator.type.indexOf('image') === 0) {
-                // TODO: Reflect: Does it make sense to put the cached images into an object?
-                var img = new root.Image();
-                img.onload = loadSuccess(iterator);
-                img.onerror = loadError(iterator);
+        self.maxAssets += value.files.length;
 
-                img.src = iterator.name;
-              } else {
-                // Handle audio here
-                if (iterator.type.indexOf('audio') === 0) {
-                  // TODO: Save preloaded files in the AudioManager
-                  var audioType = iterator.name.split('.').pop();
-                  var audio = new root.Audio();
-                  if (supportedTypes[audioType] && audio.canPlayType(supportedTypes[audioType])) {
-                    audio.addEventListener('canplaythrough', loadSuccess(iterator));
-                    audio.onerror = loadError(iterator);
-                    
-                    audio.src = iterator.name;
-                    audio.load();
-                  } else {
-                    Log.w('Skipped unsupported audio file ('+supportedTypes[audioType]+') ' + iterator.name);
-                    loadSuccess(iterator)();
-                  }
+        for (var i = 0, j = value.files.length; i < j; i++) {
+          (function(iterator) {
+            // Handle images here
+            if (iterator.type.indexOf('image') === 0) {
+              // TODO: Reflect: Does it make sense to put the cached images into an object?
+              var img = new root.Image();
+              img.onload = loadSuccess(iterator);
+              img.onerror = loadError(iterator);
+
+              img.src = iterator.name;
+            } else {
+              // Handle audio here
+              if (iterator.type.indexOf('audio') === 0) {
+                // TODO: Save preloaded files in the AudioManager
+                var audioType = iterator.name.split('.').pop();
+                var audio = new root.Audio();
+                if (supportedTypes[audioType] && audio.canPlayType(supportedTypes[audioType])) {
+                  audio.addEventListener('canplaythrough', loadSuccess(iterator));
+                  audio.onerror = loadError(iterator);
+
+                  audio.src = iterator.name;
+                  audio.load();
                 } else {
-                  $.ajax({
-                    url: iterator.name,
-                    dataType: 'text'
-                  }).always(loadSuccess(iterator)).error(loadError(iterator));
+                  Log.w('Skipped unsupported audio file (' + supportedTypes[audioType] + ') ' + iterator.name);
+                  loadSuccess(iterator)();
                 }
+              } else {
+                Log.w('Skipped file ' + iterator.name + ': Not an audio or image file');
               }
+            }
 
-            })(value.files[i]);
-          }
+          })(value.files[i]);
+        }
 
       }, this);
     }
