@@ -7,11 +7,12 @@ The base for creating games for the web.
 
 What does it provide?
 ---------------------
-* Loop (using requestAnimationFrame if available)
+* Loop (utilizing requestAnimationFrame)
 * Asset loader
 * Input handling (keyboard)
 * Logger
 * Tweens
+* Timer (requestAnimationFrame-friendly)
 
 License
 -------
