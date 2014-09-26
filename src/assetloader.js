@@ -40,10 +40,6 @@ udefine(['root', 'eventmap', 'mixedice', './log'], function(root, EventMap, mixe
 
       self.trigger('progress', percentLoaded);
 
-      if (hasLoadingScene) {
-        self.sceneDirector.currentScene.trigger('progress', percentLoaded, currentProgress, totalSize);
-      }
-
       if (currentProgress >= totalSize) {
         loadCustomTasks(function() {
           if (hasLoadingScene) {
