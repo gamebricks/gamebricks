@@ -1,4 +1,4 @@
-udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, EventMap) {
+udefine(['requestanimationframe', 'eventmap', 'gameboard/timer'], function(requestAnimationFrame, EventMap, Timer) {
   
   /**
    * @module gameboard/loop
@@ -8,6 +8,7 @@ udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, E
   
   var loopEvents = new EventMap();
   var pausedEvents = {};
+  var timers = [];
   
   /**
    * @class Loop
@@ -34,6 +35,10 @@ udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, E
         if (!isRunning) {
           return;
         }
+        
+        timers.forEach(function(timer) {
+          timer.tick(now);
+        });
 
         var eventKeys = Object.keys(loopEvents.events);
         
@@ -83,6 +88,13 @@ udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, E
       
       pausedEvents[taskName] = false;
     };
+    
+    var createTimer = function(interval) {
+      var timer = new Timer(interval);
+      timers.push(timer);
+      
+      return timer;
+    };
 
 
     return {
@@ -95,7 +107,9 @@ udefine(['requestanimationframe', 'eventmap'], function(requestAnimationFrame, E
       off: off,
       
       pause: pause,
-      resume: resume
+      resume: resume,
+      
+      createTimer: createTimer
     };
   })();
   
