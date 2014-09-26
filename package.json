@@ -24,11 +24,13 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-amd-tamer": "~0.1.7",
+    "grunt-bowercopy": "^1.1.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-dependo": "~0.1.1",
     "grunt-mocha": "~0.4.7",
+    "jit-grunt": "^0.8.0",
     "load-grunt-config": "^0.13.1",
     "matchdep": "~0.3.0",
     "time-grunt": "^1.0.0"
