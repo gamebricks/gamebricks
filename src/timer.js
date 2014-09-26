@@ -58,5 +58,7 @@ udefine(['mixedice', 'eventmap', 'performance'], function(mixedice, EventMap, pe
 
     this.trigger('stop');
   };
+  
+  return Timer;
 
 });
