@@ -14,11 +14,11 @@ udefine(['mixedice', 'eventmap', 'performance'], function(mixedice, EventMap, pe
     var oldTicks = 0;
 
     this.tick = function(currentTime) {
-      if (!self.active || !self.paused) {
+      if (!self.active || self.paused) {
         return;
       }
       
-      if (interval > 0) {
+      if (interval <= 0) {
         return;
       }
 
