@@ -41,13 +41,7 @@ udefine(['root', 'eventmap', 'mixedice', './log'], function(root, EventMap, mixe
       self.trigger('progress', percentLoaded);
 
       if (currentProgress >= totalSize) {
-        loadCustomTasks(function() {
-          if (hasLoadingScene) {
-            self.sceneDirector.currentScene.trigger('complete');
-          }
-
-          self.trigger('complete');
-        });
+        self.trigger('complete');
       }
     };
 
