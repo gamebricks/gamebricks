@@ -1,6 +1,8 @@
-udefine(['gameboard/bezier-easing', 'gameboard/loop'], function(BezierEasing, Loop) {
+udefine(['mixedice', 'eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(mixedice, EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
+    mixedice([this, Tween.prototype], new EventMap());
+    
     this.target = null;
   };
 
@@ -16,14 +18,23 @@ udefine(['gameboard/bezier-easing', 'gameboard/loop'], function(BezierEasing, Lo
       
       timer.interval = time;
       
+      timer.on('start', function() {
+        self.trigger('start');
+      });
+      
+      timer.start();
+      
       timer.on('tick', function(ticks) {
         var multiplicator = BezierEasing.css[easing](ticks / (timer.startTime + timer.interval));
+        var points = (end - start) * multiplicator;
         
-        self.target[property] = (end - start) * multiplicator;
+        self.target[property] = points;
+        self.trigger('animate', points);
       });
       
       timer.on('interval', function() {
         timer.stop();
+        self.trigger('end');
       });
 
     }
