@@ -1,6 +1,6 @@
 {
   "name": "gameboard",
-  "version": "0.1.0",
+  "version": "0.2.0-alpha1",
   "description": "Base for creating games for the web",
   "main": "dist/gameboard.js",
   "scripts": {
