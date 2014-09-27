@@ -22,7 +22,7 @@ udefine(['mixedice', 'eventmap', 'performance'], function(mixedice, EventMap, pe
         return;
       }
 
-      self.trigger('tick');
+      self.trigger('tick', currentTime);
 
       if ((currentTime - self.startTime - self.interval) > oldTicks) {
         oldTicks = currentTime;
