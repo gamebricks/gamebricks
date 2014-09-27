@@ -41,13 +41,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', 'mixedice', './log'], func
       self.trigger('progress', percentLoaded);
 
       if (currentProgress >= totalSize) {
-        loadCustomTasks(function() {
-          if (hasLoadingScene) {
-            self.sceneDirector.currentScene.trigger('complete');
-          }
-
-          self.trigger('complete');
-        });
+        self.trigger('complete');
       }
     };
 
@@ -650,6 +644,13 @@ udefine('lerp', ['clamp'], function(clamp) {
 	};
 });
 
+(function(root) {
+  'use strict';
+  
+  define('root', function() {
+    return root;
+  });
+})(this);
 udefine('gameboard/timer', ['mixedice', 'eventmap', 'performance'], function(mixedice, EventMap, performance) {
 
   var Timer = function(interval) {
@@ -666,15 +667,15 @@ udefine('gameboard/timer', ['mixedice', 'eventmap', 'performance'], function(mix
     var oldTicks = 0;
 
     this.tick = function(currentTime) {
-      if (!self.active || !self.paused) {
+      if (!self.active || self.paused) {
         return;
       }
       
-      if (interval > 0) {
+      if (interval <= 0) {
         return;
       }
 
-      self.trigger('tick');
+      self.trigger('tick', currentTime);
 
       if ((currentTime - self.startTime - self.interval) > oldTicks) {
         oldTicks = currentTime;
@@ -710,12 +711,16 @@ udefine('gameboard/timer', ['mixedice', 'eventmap', 'performance'], function(mix
 
     this.trigger('stop');
   };
+  
+  return Timer;
 
 });
 
-udefine('gameboard/tween', ['bezier-easing', 'gameboard/loop'], function(BezierEasing, Loop) {
+udefine('gameboard/tween', ['mixedice', 'eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(mixedice, EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
+    mixedice([this, Tween.prototype], new EventMap());
+    
     this.target = null;
   };
 
@@ -725,20 +730,40 @@ udefine('gameboard/tween', ['bezier-easing', 'gameboard/loop'], function(BezierE
     if (this.target && typeof this.target[property] === 'number') {
       var start = this.target[property];
       
+      if (start === end) {
+        this.trigger('start');
+        this.trigger('end');
+        return;
+      }
+      
       easing = easing || 'linear';
 
       var timer = Loop.createTimer();
       
       timer.interval = time;
       
+      timer.on('start', function() {
+        self.trigger('start');
+      });
+      
+      timer.start();
+      
       timer.on('tick', function(ticks) {
         var multiplicator = BezierEasing.css[easing](ticks / (timer.startTime + timer.interval));
+        var points = (end - start) * multiplicator;
         
-        self.target[property] = (end - start) * multiplicator;
+        if (points > end) {
+          points = end;
+        }
+        
+        self.target[property] = points;
+        self.trigger('animate', points);
       });
       
       timer.on('interval', function() {
         timer.stop();
+        self.target[property] = end;
+        self.trigger('end');
       });
 
     }
