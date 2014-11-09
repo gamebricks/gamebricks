@@ -1,4 +1,4 @@
-udefine(['root', 'eventmap', 'mixedice', './log'], function(root, EventMap, mixedice, Log) {
+udefine(['root', 'eventmap', './log'], function(root, EventMap, Log) {
 
   var audioTypes = {
     'mp3': 'audio/mpeg',
@@ -13,7 +13,7 @@ udefine(['root', 'eventmap', 'mixedice', './log'], function(root, EventMap, mixe
   };
 
   var AssetLoader = function(assets) {
-    mixedice([this, Preloader.prototype], new EventMap());
+    EventMap.mixin(this, AssetLoader.prototype);
 
     this.assets = assets || {};
     this.files = {};
