@@ -1,7 +1,7 @@
-udefine(['mixedice', 'eventmap', 'performance'], function(mixedice, EventMap, performance) {
+udefine(['eventmap', 'performance'], function(EventMap, performance) {
 
   var Timer = function(interval) {
-    mixedice([this, Timer.prototype], new EventMap());
+    EventMap.mixin(this, Timer.prototype);
     
     var self = this;
 
