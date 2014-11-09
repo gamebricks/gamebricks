@@ -108,7 +108,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, E
     }
   };
 
-  return AssetLoaderoader;
+  return AssetLoader;
 
 });
 
