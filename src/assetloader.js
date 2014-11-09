@@ -108,6 +108,6 @@ udefine(['root', 'eventmap', './log'], function(root, EventMap, Log) {
     }
   };
 
-  return AssetLoaderoader;
+  return AssetLoader;
 
 });
