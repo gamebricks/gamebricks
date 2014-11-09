@@ -1,4 +1,4 @@
-udefine('gameboard/assetloader', ['root', 'eventmap', 'mixedice', './log'], function(root, EventMap, mixedice, Log) {
+udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, EventMap, Log) {
 
   var audioTypes = {
     'mp3': 'audio/mpeg',
@@ -13,7 +13,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', 'mixedice', './log'], func
   };
 
   var AssetLoader = function(assets) {
-    mixedice([this, Preloader.prototype], new EventMap());
+    EventMap.mixin(this, AssetLoader.prototype);
 
     this.assets = assets || {};
     this.files = {};
@@ -663,10 +663,10 @@ udefine('lerp', ['clamp'], function(clamp) {
     return root;
   });
 })(this);
-udefine('gameboard/timer', ['mixedice', 'eventmap', 'performance'], function(mixedice, EventMap, performance) {
+udefine('gameboard/timer', ['eventmap', 'performance'], function(EventMap, performance) {
 
   var Timer = function(interval) {
-    mixedice([this, Timer.prototype], new EventMap());
+    EventMap.mixin(this, Timer.prototype);
     
     var self = this;
 
@@ -728,10 +728,10 @@ udefine('gameboard/timer', ['mixedice', 'eventmap', 'performance'], function(mix
 
 });
 
-udefine('gameboard/tween', ['mixedice', 'eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(mixedice, EventMap, BezierEasing, Loop) {
+udefine('gameboard/tween', ['eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
-    mixedice([this, Tween.prototype], new EventMap());
+    EventMap.mixin(this, Tween.prototype);
     
     this.target = null;
   };
