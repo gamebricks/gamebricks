@@ -1,7 +1,7 @@
-udefine(['mixedice', 'eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(mixedice, EventMap, BezierEasing, Loop) {
+udefine(['eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
-    mixedice([this, Tween.prototype], new EventMap());
+    EventMap.mixin(this, Tween.prototype);
     
     this.target = null;
   };
