@@ -1,6 +1,6 @@
 {
   "name": "gameboard",
-  "version": "0.2.0-alpha2",
+  "version": "0.2.0-alpha3",
   "homepage": "https://github.com/freezedev/gameboard",
   "authors": [
     "Johannes Stein <johannesstein@freeze-dev.com>"
@@ -11,7 +11,8 @@
     "game",
     "loop",
     "preloader",
-    "input"
+    "input",
+    "keyboard"
   ],
   "license": "Public domain",
   "ignore": [

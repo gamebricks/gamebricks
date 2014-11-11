@@ -528,7 +528,7 @@ udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'gameboard/timer
           timer.tick(now);
         });
 
-        var eventKeys = Object.keys(loopEvents.events);
+        var eventKeys = Object.keys(loopEvents.events.listeners);
         
         for (var i = 0, j = eventKeys.length; i < j; i++) {
           (function(key) {
