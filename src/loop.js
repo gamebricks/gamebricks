@@ -1,4 +1,4 @@
-udefine(['requestanimationframe', 'eventmap', 'gameboard/timer'], function(requestAnimationFrame, EventMap, Timer) {
+udefine(['requestanimationframe', 'eventmap', 'performance', 'gameboard/timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
   
   /**
    * @module gameboard/loop
@@ -27,7 +27,7 @@ udefine(['requestanimationframe', 'eventmap', 'gameboard/timer'], function(reque
       (function loop() {
         requestAnimationFrame(loop);
 
-        var now = performance.now() || Date.now();
+        var now = performance.now();
         var dt = now - (time || now);
 
         time = now;
