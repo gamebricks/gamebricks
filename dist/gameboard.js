@@ -486,7 +486,7 @@ define('gameboard/log', ['root'], function(root) {
 
   return Log;
 });
-udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'gameboard/timer'], function(requestAnimationFrame, EventMap, Timer) {
+udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'performance', 'gameboard/timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
   
   /**
    * @module gameboard/loop
@@ -515,7 +515,7 @@ udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'gameboard/timer
       (function loop() {
         requestAnimationFrame(loop);
 
-        var now = performance.now() || Date.now();
+        var now = performance.now();
         var dt = now - (time || now);
 
         time = now;
