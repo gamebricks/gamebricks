@@ -12,7 +12,7 @@ What does it provide?
 * Input handling (keyboard)
 * Logger
 * Tweens
-* Timer (requestAnimationFrame-friendly)
+* Timer (`requestAnimationFrame`-friendly)
 
 License
 -------
