@@ -13,7 +13,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, E
   };
 
   var AssetLoader = function(assets) {
-    EventMap.mixin(this, AssetLoader.prototype);
+    EventMap.mixin(this, AssetLoader);
 
     this.assets = assets || {};
     this.files = {};
