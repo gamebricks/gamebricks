@@ -35,6 +35,10 @@ __history
 ########################
 .project
 
+# Webstorm #
+############
+.idea
+
 # Node.js #
 ###########
 node_modules
