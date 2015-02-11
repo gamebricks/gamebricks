@@ -1,4 +1,4 @@
-udefine(['eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(EventMap, BezierEasing, Loop) {
+udefine(['eventmap', './bezier-easing', './loop'], function(EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
     EventMap.mixin(this, Tween.prototype);
