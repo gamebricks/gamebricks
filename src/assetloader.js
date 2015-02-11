@@ -21,6 +21,7 @@ udefine(['root', 'eventmap', './log'], function(root, EventMap, Log) {
     this.maxAssets = 0;
     this.assetsLoaded = 0;
     this.percentLoaded = 0;
+    this.cache = {};
   };
 
   AssetLoader.prototype.start = function() {
@@ -32,7 +33,7 @@ udefine(['root', 'eventmap', './log'], function(root, EventMap, Log) {
 
     var loadingProgress = function() {
 
-      var percentLoaded = 100;
+      var percentLoaded = 1;
 
       if (currentProgress !== totalSize) {
         percentLoaded = currentProgress / totalSize;
