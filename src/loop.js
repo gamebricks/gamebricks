@@ -1,4 +1,4 @@
-udefine(['requestanimationframe', 'eventmap', 'performance', 'gameboard/timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
+udefine(['requestanimationframe', 'eventmap', 'performance', './timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
   
   /**
    * @module gameboard/loop
