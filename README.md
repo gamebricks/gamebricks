@@ -7,7 +7,7 @@ When you create games (or game engines) for the web, you have some code you alwa
 
 What does it provide?
 ---------------------
-* Loop (utilizing requestAnimationFrame)
+* Loop (utilizing `requestAnimationFrame`)
 * Asset loader
 * Input handling (keyboard)
 * Logger
