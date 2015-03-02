@@ -1,4 +1,4 @@
-udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, EventMap, Log) {
+udefine('gamebox/assetloader', ['root', 'eventmap', './log'], function(root, EventMap, Log) {
 
   var audioTypes = {
     'mp3': 'audio/mpeg',
@@ -128,7 +128,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, E
     module.exports = definition();
   }
   else if (typeof window.define === 'function' && window.define.amd) {
-    window.define('gameboard/bezier-easing', [], definition);
+    window.define('gamebox/bezier-easing', [], definition);
   } else {
     window.BezierEasing = definition();
   }
@@ -266,7 +266,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, E
 
 }));
 
-udefine('gameboard', ['gameboard/assetloader', 'gameboard/input', 'gameboard/loop', 'gameboard/log', 'gameboard/timer'], function(AssetLoader, Input, Loop, Log, Timer) {
+udefine('gamebox', ['gameboard/assetloader', 'gameboard/input', 'gameboard/loop', 'gameboard/log', 'gameboard/timer'], function(AssetLoader, Input, Loop, Log, Timer) {
   
   return {
     AssetLoader: AssetLoader,
@@ -278,7 +278,7 @@ udefine('gameboard', ['gameboard/assetloader', 'gameboard/input', 'gameboard/loo
   
 });
 
-udefine('gameboard/input', ['root', 'eventmap', 'gameboard/key'], function(root, EventMap, Key) {
+udefine('gamebox/input', ['root', 'eventmap', 'gameboard/key'], function(root, EventMap, Key) {
 
   var Input = {};
 
@@ -302,7 +302,7 @@ udefine('gameboard/input', ['root', 'eventmap', 'gameboard/key'], function(root,
   return Input;
 });
 
-udefine('gameboard/key', function() {
+udefine('gamebox/key', function() {
   'use strict';
   
   var Key = {
@@ -408,7 +408,7 @@ udefine('gameboard/key', function() {
   return Key;
 
 });
-define('gameboard/log', ['root'], function(root) {
+define('gamebox/log', ['root'], function(root) {
   'use strict';
   /**
    * @module gameboard/log
@@ -487,7 +487,7 @@ define('gameboard/log', ['root'], function(root) {
 
   return Log;
 });
-udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'performance', './timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
+udefine('gamebox/loop', ['requestanimationframe', 'eventmap', 'performance', './timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
   
   /**
    * @module gameboard/loop
@@ -664,7 +664,7 @@ udefine('lerp', ['clamp'], function(clamp) {
     return root;
   });
 })(this);
-udefine('gameboard/timer', ['eventmap', 'performance'], function(EventMap, performance) {
+udefine('gamebox/timer', ['eventmap', 'performance'], function(EventMap, performance) {
 
   var Timer = function(interval) {
     EventMap.mixin(this, Timer.prototype);
@@ -729,7 +729,7 @@ udefine('gameboard/timer', ['eventmap', 'performance'], function(EventMap, perfo
 
 });
 
-udefine('gameboard/tween', ['eventmap', './bezier-easing', './loop'], function(EventMap, BezierEasing, Loop) {
+udefine('gamebox/tween', ['eventmap', './bezier-easing', './loop'], function(EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
     EventMap.mixin(this, Tween.prototype);
