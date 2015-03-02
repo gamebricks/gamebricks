@@ -1,14 +1,14 @@
 {
-  "name": "gameboard",
+  "name": "gamebox",
   "version": "0.2.0-alpha8",
   "description": "Base for creating games for the web",
-  "main": "dist/gameboard.js",
+  "main": "dist/gamebox.js",
   "scripts": {
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/freezedev/gameboard.git"
+    "url": "https://github.com/freezedev/gamebox.git"
   },
   "keywords": [
     "game",
@@ -19,7 +19,7 @@
   "author": "Johannes Stein",
   "license": "Public domain",
   "bugs": {
-    "url": "https://github.com/freezedev/gameboard/issues"
+    "url": "https://github.com/freezedev/gamebox/issues"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

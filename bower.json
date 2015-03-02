@@ -1,12 +1,12 @@
 {
-  "name": "gameboard",
+  "name": "gamebox",
   "version": "0.2.0-alpha8",
-  "homepage": "https://github.com/freezedev/gameboard",
+  "homepage": "https://github.com/freezedev/gamebox",
   "authors": [
     "Johannes Stein <johannesstein@freeze-dev.com>"
   ],
   "description": "Base for creating games for the web",
-  "main": "dist/gameboard.js",
+  "main": "dist/gamebox.js",
   "keywords": [
     "game",
     "loop",
