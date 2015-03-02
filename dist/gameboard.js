@@ -21,6 +21,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, E
     this.maxAssets = 0;
     this.assetsLoaded = 0;
     this.percentLoaded = 0;
+    this.cache = {};
   };
 
   AssetLoader.prototype.start = function() {
@@ -32,7 +33,7 @@ udefine('gameboard/assetloader', ['root', 'eventmap', './log'], function(root, E
 
     var loadingProgress = function() {
 
-      var percentLoaded = 100;
+      var percentLoaded = 1;
 
       if (currentProgress !== totalSize) {
         percentLoaded = currentProgress / totalSize;
@@ -486,7 +487,7 @@ define('gameboard/log', ['root'], function(root) {
 
   return Log;
 });
-udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'performance', 'gameboard/timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
+udefine('gameboard/loop', ['requestanimationframe', 'eventmap', 'performance', './timer'], function(requestAnimationFrame, EventMap, performance, Timer) {
   
   /**
    * @module gameboard/loop
@@ -728,7 +729,7 @@ udefine('gameboard/timer', ['eventmap', 'performance'], function(EventMap, perfo
 
 });
 
-udefine('gameboard/tween', ['eventmap', 'gameboard/bezier-easing', 'gameboard/loop'], function(EventMap, BezierEasing, Loop) {
+udefine('gameboard/tween', ['eventmap', './bezier-easing', './loop'], function(EventMap, BezierEasing, Loop) {
 
   var Tween = function() {
     EventMap.mixin(this, Tween.prototype);
