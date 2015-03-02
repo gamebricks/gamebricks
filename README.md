@@ -1,9 +1,9 @@
-gameboard
-=========
+gamebox
+=======
 
-[![devDependency Status](https://david-dm.org/freezedev/gameboard/dev-status.svg)](https://david-dm.org/freezedev/gameboard#info=devDependencies)
+[![devDependency Status](https://david-dm.org/freezedev/gamebox/dev-status.svg)](https://david-dm.org/freezedev/gamebox#info=devDependencies)
 
-When you create games (or game engines) for the web, you have some code you always end up using. `gameboard` aims to provide that base code.
+When you create games (or game engines) for the web, you have some code you always end up using. `gamebox` aims to provide that base code.
 
 What does it provide?
 ---------------------
