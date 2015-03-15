@@ -13,6 +13,7 @@ What does it provide?
 * Logger
 * Tweens
 * Timer (`requestAnimationFrame`-friendly)
+* Vectors
 
 License
 -------
