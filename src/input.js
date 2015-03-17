@@ -1,23 +1,25 @@
-udefine(['root', 'eventmap', 'gameboard/key'], function(root, EventMap, Key) {
+'use strict';
 
-  var Input = {};
+import EventMap from 'eventmap';
+import Key from './key';
 
-  Input.define = Key.define;
-  Input.key = new EventMap();
+var Input = {};
 
-  root.addEventListener('keydown', function(evt) {
-    Input.key.trigger({
-      name: 'down',
-      context: Key
-    }, evt.keyCode);
-  }, true);
-  
-  root.addEventListener('keyup', function(evt) {
-    Input.key.trigger({
-      name: 'up',
-      context: Key
-    }, evt.keyCode);
-  }, true);
+Input.define = Key.define;
+Input.key = new EventMap();
 
-  return Input;
-});
+window.addEventListener('keydown', function(evt) {
+  Input.key.trigger({
+    name: 'down',
+    context: Key
+  }, evt.keyCode);
+}, true);
+
+window.addEventListener('keyup', function(evt) {
+  Input.key.trigger({
+    name: 'up',
+    context: Key
+  }, evt.keyCode);
+}, true);
+
+export default Input;
