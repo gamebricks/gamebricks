@@ -1,7 +1,7 @@
 module.exports =
   options:
-    base: 'src/'
+    base: 'tmp/amd/'
     namespace: '<%= package.name %>'
   scripts:
-    src: ['src/**/*.js'],
-    dest: 'dist/<%= package.name %>.js'
+    src: ['tmp/amd/**/*.js'],
+    dest: 'dist/amd/<%= package.name %>.js'
