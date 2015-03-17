@@ -4,4 +4,4 @@ module.exports =
     report: 'gzip'
   dist:
     files:
-      'dist/<%= package.name %>.min.js': ['<%= amd_tamer.scripts.dest %>']
+      'dist/amd/<%= package.name %>.min.js': ['<%= amd_tamer.scripts.dest %>']
