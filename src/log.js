@@ -1,79 +1,73 @@
-define(['root'], function(root) {
-  'use strict';
-  /**
-   * @module gameboard/log
-   * @requires root
-   */
-  
-  /**
-   * @class
-   * @alias module:gameboard/log
-   */
-  var Log = (function() {
+'use strict';
 
-    var Log = {};
+/**
+ * @class
+ * @alias module:gameboard/log
+ */
+var Log = (function() {
 
-    Log.connector = null;
+  var Log = {};
 
-    Log.plugins = {};
+  Log.connector = null;
 
-    Log.plugins.console = {
-      e: function() {
-        if (root.console && root.console.error) {
-          return root.console.error.apply(console, arguments);
-        }
-      },
-      w: function() {
-        if (root.console && root.console.warn) {
-          return root.console.warn.apply(console, arguments);
-        }
-      },
-      i: function() {
-        if (root.console && root.console.info) {
-          return root.console.info.apply(console, arguments);
-        }
-      },
-      d: function() {
-        if (root.console && root.console.log) {
-          return root.console.log.apply(console, arguments);
-        }
-      },
-      v: function() {
-        if (root.console && root.console.log) {
-          return root.console.log.apply(console, arguments);
-        }
+  Log.plugins = {};
+
+  Log.plugins.console = {
+    e: function() {
+      if (window.console && window.console.error) {
+        return window.console.error.apply(window.console, arguments);
       }
-    };
-
-    Log.connector = Log.plugins.console;
-
-    Log.logLevelMap = {
-      'error': ['e'],
-      'warn': ['w', 'e'],
-      'info': ['i', 'w', 'e'],
-      'debug': ['d', 'i', 'w', 'e'],
-      'verbose': ['v', 'd', 'i', 'w', 'e']
-    };
-
-    Log.logLevel = 'verbose';
-
-    var logFunctions = ['v', 'd', 'i', 'w', 'e'];
-
-    for (var i = 0, j = logFunctions.length; i < j; i++) {
-
-      (function(iterator) {
-        Log[iterator] = function() {
-          if (Log.logLevelMap[Log.logLevel].indexOf(iterator) >= 0) {
-            Log.connector[iterator].apply(this, arguments);
-          }
-        };        
-      })(logFunctions[i]);
-      
+    },
+    w: function() {
+      if (window.console && window.console.warn) {
+        return window.console.warn.apply(window.console, arguments);
+      }
+    },
+    i: function() {
+      if (window.console && window.console.info) {
+        return window.console.info.apply(window.console, arguments);
+      }
+    },
+    d: function() {
+      if (window.console && window.console.log) {
+        return window.console.log.apply(window.console, arguments);
+      }
+    },
+    v: function() {
+      if (window.console && window.console.log) {
+        return window.console.log.apply(window.console, arguments);
+      }
     }
+  };
 
-    return Log;
+  Log.connector = Log.plugins.console;
 
-  })();
+  Log.logLevelMap = {
+    'error': ['e'],
+    'warn': ['w', 'e'],
+    'info': ['i', 'w', 'e'],
+    'debug': ['d', 'i', 'w', 'e'],
+    'verbose': ['v', 'd', 'i', 'w', 'e']
+  };
+
+  Log.logLevel = 'verbose';
+
+  var logFunctions = ['v', 'd', 'i', 'w', 'e'];
+
+  for (var i = 0, j = logFunctions.length; i < j; i++) {
+
+    (function(iterator) {
+      Log[iterator] = function() {
+        if (Log.logLevelMap[Log.logLevel].indexOf(iterator) >= 0) {
+          Log.connector[iterator].apply(this, arguments);
+        }
+      };
+    })(logFunctions[i]);
+
+  }
 
   return Log;
-});
+
+})();
+
+export default Log;
