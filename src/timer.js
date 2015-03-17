@@ -1,10 +1,10 @@
-udefine(['eventmap', 'performance'], function(EventMap, performance) {
+'use strict';
 
-  var Timer = function(interval) {
-    EventMap.mixin(this, Timer.prototype);
-    
-    var self = this;
+import EventMap from 'eventmap';
+import performance from 'performance';
 
+class Timer extends EventMap {
+  constructor(interval) {
     this.interval = interval || 1000;
     this.startTime = -1;
 
@@ -13,52 +13,51 @@ udefine(['eventmap', 'performance'], function(EventMap, performance) {
 
     var oldTicks = 0;
 
-    this.tick = function(currentTime) {
-      if (!self.active || self.paused) {
+    this.tick = (currentTime) => {
+      if (!this.active || this.paused) {
         return;
       }
-      
+
       if (interval <= 0) {
         return;
       }
 
-      self.trigger('tick', currentTime);
+      this.trigger('tick', currentTime);
 
-      if ((currentTime - self.startTime - self.interval) > oldTicks) {
+      if ((currentTime - this.startTime - this.interval) > oldTicks) {
         oldTicks = currentTime;
-        self.trigger('interval');
+        this.trigger('interval');
       }
     };
-  };
+  }
 
-  Timer.prototype.start = function() {
+  start() {
     this.active = true;
     this.paused = false;
 
     this.startTime = performance.now();
 
     this.trigger('start');
-  };
+  }
 
-  Timer.prototype.pause = function() {
+  pause() {
     this.paused = true;
 
     this.trigger('pause');
-  };
+  }
 
-  Timer.prototype.unpause = function() {
+  unpause() {
     this.paused = false;
 
     this.trigger('unpause');
-  };
+  }
 
-  Timer.prototype.stop = function() {
+  stop() {
     this.paused = false;
     this.active = false;
 
     this.trigger('stop');
-  };
-  
-  return Timer;
+  }
+}
 
-});
+export default Timer;
