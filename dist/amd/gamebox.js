@@ -53,6 +53,29 @@ define('gamebox/assetloader', ["exports", "module", "eventmap", "./log"], functi
 });
 
 // TODO: Something was wrong here. So it's deleted right now
+define('gamebox', ["exports", "module", "./assetloader", "./input", "./loop", "./log", "./timer"], function (exports, module, _assetloader, _input, _loop, _log, _timer) {
+  "use strict";
+
+  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+  var AssetLoader = _interopRequire(_assetloader);
+
+  var Input = _interopRequire(_input);
+
+  var Loop = _interopRequire(_loop);
+
+  var Log = _interopRequire(_log);
+
+  var Timer = _interopRequire(_timer);
+
+  module.exports = {
+    AssetLoader: AssetLoader,
+    Input: Input,
+    Loop: Loop,
+    Log: Log,
+    Timer: Timer
+  };
+});
 define('gamebox/input', ["exports", "module", "eventmap", "./key"], function (exports, module, _eventmap, _key) {
   "use strict";
 
@@ -187,29 +210,6 @@ define('gamebox/key', ["exports", "module"], function (exports, module) {
   };
 
   module.exports = Key;
-});
-define('gamebox/lib', ["exports", "module", "./assetloader", "./input", "./loop", "./log", "./timer"], function (exports, module, _assetloader, _input, _loop, _log, _timer) {
-  "use strict";
-
-  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-  var AssetLoader = _interopRequire(_assetloader);
-
-  var Input = _interopRequire(_input);
-
-  var Loop = _interopRequire(_loop);
-
-  var Log = _interopRequire(_log);
-
-  var Timer = _interopRequire(_timer);
-
-  module.exports = {
-    AssetLoader: AssetLoader,
-    Input: Input,
-    Loop: Loop,
-    Log: Log,
-    Timer: Timer
-  };
 });
 define('gamebox/log', ["exports", "module"], function (exports, module) {
   "use strict";
@@ -639,4 +639,532 @@ define('gamebox/tween', ["exports", "module", "eventmap", "./bezier-easing", "./
   })(EventMap);
 
   module.exports = Tween;
+});
+define('gamebox/types/color', ["exports", "module", "../math/clamp"], function (exports, module, _mathClamp) {
+  "use strict";
+
+  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+  var clamp = _interopRequire(_mathClamp);
+
+  //import colorConstants from 'flockn/constants/color';
+
+  var Color = (function () {
+    function Color() {
+      var r = arguments[0] === undefined ? 0 : arguments[0];
+      var g = arguments[1] === undefined ? 0 : arguments[1];
+      var b = arguments[2] === undefined ? 0 : arguments[2];
+      var a = arguments[3] === undefined ? 1 : arguments[3];
+
+      _classCallCheck(this, Color);
+
+      this.set(r, g, b, a);
+    }
+
+    _createClass(Color, {
+      set: {
+        value: function set() {
+          var r = arguments[0] === undefined ? 0 : arguments[0];
+          var g = arguments[1] === undefined ? 0 : arguments[1];
+          var b = arguments[2] === undefined ? 0 : arguments[2];
+          var a = arguments[3] === undefined ? 1 : arguments[3];
+
+          this.r = r;
+          this.g = g;
+          this.b = b;
+          this.a = a;
+        }
+      },
+      lighten: {
+        value: function lighten(factor) {
+          factor = clamp(factor, 0, 1);
+
+          this.r = clamp(this.r + factor * 255 | 0, 0, 255);
+          this.g = clamp(this.g + factor * 255 | 0, 0, 255);
+          this.b = clamp(this.b + factor * 255 | 0, 0, 255);
+        }
+      },
+      darken: {
+        value: function darken(factor) {
+          factor = clamp(factor, 0, 1);
+
+          this.r = clamp(this.r - factor * 255 | 0, 0, 255);
+          this.g = clamp(this.g - factor * 255 | 0, 0, 255);
+          this.b = clamp(this.b - factor * 255 | 0, 0, 255);
+        }
+      },
+      fadeIn: {
+        value: function fadeIn(factor) {
+          factor = clamp(factor, 0, 1);
+
+          this.a = this.a + this.a * factor;
+          if (this.a > 1) {
+            this.a = 1;
+          }
+        }
+      },
+      fadeOut: {
+        value: function fadeOut(factor) {
+          factor = clamp(factor, 0, 1);
+
+          this.a = this.a - this.a * factor;
+          if (this.a < 0) {
+            this.a = 0;
+          }
+        }
+      },
+      toJSON: {
+        value: function toJSON() {
+          if (this.a < 1) {
+            if (this.a === 0) {
+              return "transparent";
+            } else {
+              return "rgba(" + this.r + "," + this.g + "," + this.b + "," + this.a + ")";
+            }
+          } else {
+            return "rgb(" + this.r + "," + this.g + "," + this.b + ")";
+          }
+        }
+      },
+      toString: {
+        value: function toString() {
+          return this.toJSON();
+        }
+      },
+      toHex: {
+        value: function toHex() {
+          return "#" + this.r.toString(16) + "" + this.g.toString(16) + "" + this.b.toString(16);
+        }
+      }
+    }, {
+      random: {
+
+        // Getting a random color for debugging is quite useful sometimes
+
+        value: function random() {
+          var col = [0, 0, 0];
+
+          col = col.map(function () {
+            return ~ ~(Math.random() * 255);
+          });
+
+          return new Color(col[0], col[1], col[2]);
+        }
+      }
+    });
+
+    return Color;
+  })();
+
+  /*for (var colorName in colorConstants) {
+    var colorValue = colorConstants[colorName];
+  
+    (function(colorName, colorValue) {
+      Color[colorName] = function() {
+        var col = new Color(colorValue.r, colorValue.g, colorValue.b, colorValue.a);
+        col.name = colorName;
+        return col;
+      };
+    })(colorName, colorValue);
+  }*/
+
+  module.exports = Color;
+});
+define('gamebox/types', ["exports", "./color", "./vector2", "./vector3", "./rect"], function (exports, _color, _vector2, _vector3, _rect) {
+  "use strict";
+
+  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  "use strict";
+
+  var Color = _interopRequire(_color);
+
+  var Vector2 = _interopRequire(_vector2);
+
+  var Vector3 = _interopRequire(_vector3);
+
+  var Rect = _interopRequire(_rect);
+
+  var Types = {};
+
+  Types.Color = Color;
+  Types.Vector2 = Vector2;
+  Types.Vector3 = Vector3;
+  Types.Rect = Rect;
+
+  exports["default"] = Types;
+  exports.Color = Color;
+  exports.Vector2 = Vector2;
+  exports.Vector3 = Vector3;
+  exports.Rect = Rect;
+});
+define('gamebox/types/rect', ["exports", "module", "./vector2"], function (exports, module, _vector2) {
+  "use strict";
+
+  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+  var Vector2 = _interopRequire(_vector2);
+
+  var Rect = (function () {
+    function Rect() {
+      var x = arguments[0] === undefined ? 0 : arguments[0];
+      var y = arguments[1] === undefined ? 0 : arguments[1];
+      var w = arguments[2] === undefined ? 0 : arguments[2];
+      var h = arguments[3] === undefined ? 0 : arguments[3];
+
+      _classCallCheck(this, Rect);
+
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    }
+
+    _createClass(Rect, {
+      clone: {
+        value: function clone() {
+          return new Rect({ x: this.x, y: this.y, w: this.w, h: this.h });
+        }
+      },
+      toJSON: {
+        value: function toJSON() {
+          return { x: this.x, y: this.y, w: this.w, h: this.h };
+        }
+      },
+      toString: {
+        value: function toString() {
+          return JSON.stringify(this.toJSON());
+        }
+      },
+      center: {
+        value: function center() {
+          return new Vector2(this.x + this.w / 2, this.y + this.h / 2);
+        }
+      },
+      contains: {
+        value: function contains(vector) {
+          return vector.x >= this.x && vector.y >= this.y && vector.x < this.x + this.w && vector.y < this.y + this.h;
+        }
+      }
+    }, {
+      fromString: {
+        value: function fromString(str) {
+          var obj = JSON.parse(str);
+
+          return new Rect(obj.x, obj.y, obj.w, obj.h);
+        }
+      }
+    });
+
+    return Rect;
+  })();
+
+  module.exports = Rect;
+});
+define('gamebox/types/vector2', ["exports", "module"], function (exports, module) {
+  "use strict";
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+  var sqrMagnitude = function sqrMagnitude(v) {
+    return Vector2.dot(v, v);
+  };
+
+  var Vector2 = (function () {
+    function Vector2() {
+      var x = arguments[0] === undefined ? 0 : arguments[0];
+      var y = arguments[1] === undefined ? 0 : arguments[1];
+
+      _classCallCheck(this, Vector2);
+
+      this.set(x, y);
+    }
+
+    _createClass(Vector2, {
+      set: {
+        value: function set() {
+          var x = arguments[0] === undefined ? 0 : arguments[0];
+          var y = arguments[1] === undefined ? 0 : arguments[1];
+
+          this.x = x;
+          this.y = y;
+        }
+      },
+      magnitude: {
+        get: function () {
+          return Math.sqrt(sqrMagnitude(this));
+        }
+      },
+      sqrMagnitude: {
+        get: function () {
+          return sqrMagnitude(this);
+        }
+      },
+      angle: {
+        get: function () {
+          return Math.atan2(this.x, this.y);
+        }
+      },
+      toJSON: {
+        value: function toJSON() {
+          return this.clone();
+        }
+      },
+      toString: {
+        value: function toString() {
+          return JSON.stringify(this.toJSON());
+        }
+      },
+      clone: {
+        value: function clone() {
+          return new Vector2(this.x, this.y);
+        }
+      },
+      add: {
+        value: function add(vector) {
+          this.x += vector.x;
+          this.y += vector.y;
+
+          return this;
+        }
+      },
+      subtract: {
+        value: function subtract(vector) {
+          this.x -= vector.x;
+          this.y -= vector.y;
+
+          return this;
+        }
+      },
+      multiply: {
+        value: function multiply(vector) {
+          this.x *= vector.x;
+          this.y *= vector.y;
+
+          return this;
+        }
+      },
+      divide: {
+        value: function divide(vector) {
+          this.x /= vector.x;
+          this.y /= vector.y;
+
+          return this;
+        }
+      },
+      normalize: {
+        value: function normalize() {
+          this.x = this.x / this.magnitude;
+          this.y = this.y / this.magnitude;
+
+          return this;
+        }
+      },
+      equals: {
+        value: function equals(v) {
+          return this.x === v.x && this.y === v.y;
+        }
+      }
+    }, {
+      dot: {
+        value: function dot(vec1, vec2) {
+          return vec1.x * vec2.x + vec1.y * vec2.y;
+        }
+      },
+      fromAngle: {
+        value: function fromAngle(angle, magnitude) {
+          return new Vector2(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
+        }
+      },
+      fromJSON: {
+        value: function fromJSON(obj) {
+          return new Vector2(obj.x, obj.y);
+        }
+      },
+      fromString: {
+        value: function fromString(str) {
+          return Vector2.fromJSON(JSON.parse(str));
+        }
+      }
+    });
+
+    return Vector2;
+  })();
+
+  module.exports = Vector2;
+});
+define('gamebox/types/vector3', ["exports", "module"], function (exports, module) {
+  "use strict";
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+  var sqrMagnitude = function sqrMagnitude(v) {
+    return Vector3.dot(v, v);
+  };
+
+  var Vector3 = (function () {
+    function Vector3() {
+      var x = arguments[0] === undefined ? 0 : arguments[0];
+      var y = arguments[1] === undefined ? 0 : arguments[1];
+      var z = arguments[2] === undefined ? 0 : arguments[2];
+
+      _classCallCheck(this, Vector3);
+
+      this.set(x, y, z);
+    }
+
+    _createClass(Vector3, {
+      set: {
+        value: function set() {
+          var x = arguments[0] === undefined ? 0 : arguments[0];
+          var y = arguments[1] === undefined ? 0 : arguments[1];
+          var z = arguments[2] === undefined ? 0 : arguments[2];
+
+          this.x = x;
+          this.y = y;
+          this.z = z;
+        }
+      },
+      magnitude: {
+        get: function () {
+          return Math.sqrt(sqrMagnitude(this));
+        }
+      },
+      sqrMagnitude: {
+        get: function () {
+          return sqrMagnitude(this);
+        }
+      },
+      clone: {
+        value: function clone() {
+          return new Vector3(this.x, this.y, this.z);
+        }
+      },
+      toJSON: {
+        value: function toJSON() {
+          return this.clone();
+        }
+      },
+      toString: {
+        value: function toString() {
+          return JSON.stringify(this.toJSON());
+        }
+      },
+      add: {
+        value: function add(vector) {
+          this.x += vector.x;
+          this.y += vector.y;
+          this.z += vector.z;
+
+          return this;
+        }
+      },
+      subtract: {
+        value: function subtract(vector) {
+          this.x -= vector.x;
+          this.y -= vector.y;
+          this.z -= vector.z;
+
+          return this;
+        }
+      },
+      multiply: {
+        value: function multiply(vector) {
+          this.x *= vector.x;
+          this.y *= vector.y;
+          this.z *= vector.z;
+
+          return this;
+        }
+      },
+      divide: {
+        value: function divide(vector) {
+          this.x /= vector.x;
+          this.y /= vector.y;
+          this.z /= vector.z;
+
+          return this;
+        }
+      },
+      normalize: {
+        value: function normalize() {
+          this.x = this.x / this.magnitude;
+          this.y = this.y / this.magnitude;
+          this.z = this.z / this.magnitude;
+
+          return this;
+        }
+      },
+      equals: {
+        value: function equals(v) {
+          return this.x === v.x && this.y === v.y && this.z === v.z;
+        }
+      }
+    }, {
+      dot: {
+        value: function dot(vec1, vec2) {
+          return vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+        }
+      },
+      cross: {
+        value: function cross(vec1, vec2) {
+          return new Vector3(vec1.y * vec2.z - vec2.y * vec1.z, vec1.z * vec2.x - vec2.z * vec1.x, vec1.x * vec2.y - vec2.x * vec1.y);
+        }
+      },
+      fromJSON: {
+        value: function fromJSON(obj) {
+          return new Vector3(obj.x, obj.y, obj.z);
+        }
+      },
+      fromString: {
+        value: function fromString(str) {
+          return Vector3.fromJSON(JSON.parse(str));
+        }
+      },
+      forward: {
+        value: function forward() {
+          return new Vector3(0, 0, 1);
+        }
+      },
+      right: {
+        value: function right() {
+          return new Vector3(1, 0, 0);
+        }
+      },
+      one: {
+        value: function one() {
+          return new Vector3(1, 1, 1);
+        }
+      },
+      up: {
+        value: function up() {
+          return new Vector3(0, 1, 0);
+        }
+      },
+      zero: {
+        value: function zero() {
+          return new Vector3(0, 0, 0);
+        }
+      }
+    });
+
+    return Vector3;
+  })();
+
+  module.exports = Vector3;
 });
