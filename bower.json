@@ -6,7 +6,7 @@
     "Johannes Stein <johannesstein@freeze-dev.com>"
   ],
   "description": "Base for creating games for the web",
-  "main": "dist/gamebox.js",
+  "main": "dist/amd/gamebox.js",
   "keywords": [
     "game",
     "loop",
