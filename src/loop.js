@@ -1,6 +1,6 @@
 'use strict';
 
-import requestAnimationFrame from 'requestanimationframe';
+import {requestAnimationFrame} from 'animframe';
 import EventMap from 'eventmap';
 import performance from 'performance';
 import Timer from './timer';
