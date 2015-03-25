@@ -284,12 +284,12 @@ define('gamebox/log', ["exports", "module"], function (exports, module) {
 
   module.exports = Log;
 });
-define('gamebox/loop', ["exports", "module", "requestanimationframe", "eventmap", "performance", "./timer"], function (exports, module, _requestanimationframe, _eventmap, _performance, _timer) {
+define('gamebox/loop', ["exports", "module", "animframe", "eventmap", "performance", "./timer"], function (exports, module, _animframe, _eventmap, _performance, _timer) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-  var requestAnimationFrame = _interopRequire(_requestanimationframe);
+  var requestAnimationFrame = _animframe.requestAnimationFrame;
 
   var EventMap = _interopRequire(_eventmap);
 
@@ -472,7 +472,7 @@ define('gamebox/math/lerp', ["exports", "module", "./clamp"], function (exports,
 
   module.exports = lerp;
 });
-define('gamebox/timer', ["exports", "module", "eventmap", "performance"], function (exports, module, _eventmap, _performance) {
+define('gamebox/timer', ["exports", "module", "eventmap", "animframe"], function (exports, module, _eventmap, _animframe) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -485,7 +485,7 @@ define('gamebox/timer', ["exports", "module", "eventmap", "performance"], functi
 
   var EventMap = _interopRequire(_eventmap);
 
-  var performance = _interopRequire(_performance);
+  var performance = _animframe.performance;
 
   var Timer = (function (_EventMap) {
     function Timer(interval) {

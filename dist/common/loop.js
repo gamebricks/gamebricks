@@ -2,7 +2,7 @@
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-var requestAnimationFrame = _interopRequire(require("requestanimationframe"));
+var requestAnimationFrame = require("animframe").requestAnimationFrame;
 
 var EventMap = _interopRequire(require("eventmap"));
 

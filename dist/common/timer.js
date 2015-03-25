@@ -10,7 +10,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 var EventMap = _interopRequire(require("eventmap"));
 
-var performance = _interopRequire(require("performance"));
+var performance = require("animframe").performance;
 
 var Timer = (function (_EventMap) {
   function Timer(interval) {
