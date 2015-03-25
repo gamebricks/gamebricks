@@ -1,7 +1,7 @@
 'use strict';
 
 import EventMap from 'eventmap';
-import performance from 'performance';
+import {performance} from 'animframe';
 
 class Timer extends EventMap {
   constructor(interval) {
