@@ -1,6 +1,6 @@
 {
   "name": "gamebox",
-  "version": "0.2.0-alpha11",
+  "version": "0.2.0-alpha12",
   "description": "Base for creating games for the web",
   "main": "dist/common/index.js",
   "scripts": {
