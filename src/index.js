@@ -5,13 +5,14 @@ import Input from './input';
 import Loop from './loop';
 import Log from './log';
 import Timer from './timer';
-
+import Math from './math';
   
 export default {
-  AssetLoader: AssetLoader,
-  Input: Input,
-  Loop: Loop,
-  Log: Log,
-  Timer: Timer
+  AssetLoader,
+  Input,
+  Loop,
+  Log,
+  Timer,
+  Math
 };
   
