@@ -1,10 +1,8 @@
 'use strict';
 
-import {requestAnimationFrame} from 'animframe';
+import {requestAnimationFrame, performance} from 'animframe';
 import EventMap from 'eventmap';
-import performance from 'performance';
 import Timer from './timer';
-
 
 var loopEvents = new EventMap();
 var pausedEvents = {};
