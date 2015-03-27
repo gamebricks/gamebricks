@@ -1,6 +1,7 @@
 'use strict';
 
 import clamp from '../math/clamp';
+// TODO: Provide color constants
 //import colorConstants from 'flockn/constants/color';
 
 class Color {
