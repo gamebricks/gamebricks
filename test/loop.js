@@ -2,7 +2,7 @@
 
 import {Loop} from 'gamebox';
 
-describe('gameboard/loop', function () {
+describe('gamebox/loop', function () {
 
   it('is an object', function () {
     expect(Loop).to.be.a('object');

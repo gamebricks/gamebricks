@@ -4,7 +4,7 @@ import {Input} from 'gamebox';
 const {Key} = Input;
 
 
-describe('gameboard/input/key', function () {
+describe('gamebox/input/key', function () {
 
   it('is an object', function () {
     expect(Key).to.be.a('object');
