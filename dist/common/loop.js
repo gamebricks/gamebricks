@@ -2,11 +2,12 @@
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-var requestAnimationFrame = require("animframe").requestAnimationFrame;
+var _animframe = require("animframe");
+
+var requestAnimationFrame = _animframe.requestAnimationFrame;
+var performance = _animframe.performance;
 
 var EventMap = _interopRequire(require("eventmap"));
-
-var performance = _interopRequire(require("performance"));
 
 var Timer = _interopRequire(require("./timer"));
 

@@ -53,7 +53,7 @@ define('gamebox/assetloader', ["exports", "module", "eventmap", "./log"], functi
 });
 
 // TODO: Something was wrong here. So it's deleted right now
-define('gamebox', ["exports", "module", "./assetloader", "./input", "./loop", "./log", "./timer"], function (exports, module, _assetloader, _input, _loop, _log, _timer) {
+define('gamebox', ["exports", "module", "./assetloader", "./input", "./loop", "./log", "./timer", "./math", "./types"], function (exports, module, _assetloader, _input, _loop, _log, _timer, _math, _types) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -68,12 +68,18 @@ define('gamebox', ["exports", "module", "./assetloader", "./input", "./loop", ".
 
   var Timer = _interopRequire(_timer);
 
+  var Math = _interopRequire(_math);
+
+  var Types = _interopRequire(_types);
+
   module.exports = {
     AssetLoader: AssetLoader,
     Input: Input,
     Loop: Loop,
     Log: Log,
-    Timer: Timer
+    Timer: Timer,
+    Math: Math,
+    Types: Types
   };
 });
 define('gamebox/input', ["exports", "module", "eventmap", "./key"], function (exports, module, _eventmap, _key) {
@@ -87,7 +93,10 @@ define('gamebox/input', ["exports", "module", "eventmap", "./key"], function (ex
 
   var Input = {};
 
+  Input.Key = Key;
   Input.define = Key.define;
+
+  // TODO: Find a different name
   Input.key = new EventMap();
 
   window.addEventListener("keydown", function (evt) {
@@ -284,16 +293,15 @@ define('gamebox/log', ["exports", "module"], function (exports, module) {
 
   module.exports = Log;
 });
-define('gamebox/loop', ["exports", "module", "animframe", "eventmap", "performance", "./timer"], function (exports, module, _animframe, _eventmap, _performance, _timer) {
+define('gamebox/loop', ["exports", "module", "animframe", "eventmap", "./timer"], function (exports, module, _animframe, _eventmap, _timer) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
   var requestAnimationFrame = _animframe.requestAnimationFrame;
+  var performance = _animframe.performance;
 
   var EventMap = _interopRequire(_eventmap);
-
-  var performance = _interopRequire(_performance);
 
   var Timer = _interopRequire(_timer);
 
@@ -438,6 +446,19 @@ define('gamebox/math/clamp', ["exports", "module"], function (exports, module) {
   };
 
   module.exports = clamp;
+});
+define('gamebox/math', ["exports", "module", "./clamp", "./lerp", "./inverselerp"], function (exports, module, _clamp, _lerp, _inverselerp) {
+  "use strict";
+
+  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+  var clamp = _interopRequire(_clamp);
+
+  var lerp = _interopRequire(_lerp);
+
+  var inverseLerp = _interopRequire(_inverselerp);
+
+  module.exports = { clamp: clamp, lerp: lerp, inverseLerp: inverseLerp };
 });
 define('gamebox/math/inverselerp', ["exports", "module", "./lerp"], function (exports, module, _lerp) {
   "use strict";
@@ -651,6 +672,7 @@ define('gamebox/types/color', ["exports", "module", "../math/clamp"], function (
 
   var clamp = _interopRequire(_mathClamp);
 
+  // TODO: Provide color constants
   //import colorConstants from 'flockn/constants/color';
 
   var Color = (function () {

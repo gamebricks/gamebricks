@@ -8,6 +8,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 var clamp = _interopRequire(require("../math/clamp"));
 
+// TODO: Provide color constants
 //import colorConstants from 'flockn/constants/color';
 
 var Color = (function () {

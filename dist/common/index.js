@@ -12,10 +12,16 @@ var Log = _interopRequire(require("./log"));
 
 var Timer = _interopRequire(require("./timer"));
 
+var Math = _interopRequire(require("./math"));
+
+var Types = _interopRequire(require("./types"));
+
 module.exports = {
   AssetLoader: AssetLoader,
   Input: Input,
   Loop: Loop,
   Log: Log,
-  Timer: Timer
+  Timer: Timer,
+  Math: Math,
+  Types: Types
 };
