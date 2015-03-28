@@ -5,7 +5,10 @@ import Key from './key';
 
 var Input = {};
 
+Input.Key = Key;
 Input.define = Key.define;
+
+// TODO: Find a different name
 Input.key = new EventMap();
 
 window.addEventListener('keydown', function(evt) {
