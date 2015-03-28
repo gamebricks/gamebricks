@@ -21,7 +21,7 @@ module.exports = function (config) {
       },
       resolve: {
         alias: {
-          'animframe': path.join(process.cwd(), 'dist/common')
+          'gamebox': path.join(process.cwd(), 'dist/common')
         }
       }
     },
