@@ -1,6 +1,7 @@
 gamebox
 =======
 
+[![Dependency Status](https://david-dm.org/freezedev/gamebox.svg)](https://david-dm.org/freezedev/gamebox)
 [![devDependency Status](https://david-dm.org/freezedev/gamebox/dev-status.svg)](https://david-dm.org/freezedev/gamebox#info=devDependencies)
 [![Build Status](https://travis-ci.org/freezedev/gamebox.svg?branch=master)](https://travis-ci.org/freezedev/gamebox)
 
