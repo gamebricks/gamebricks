@@ -7,6 +7,7 @@ gamebox
 
 When you create games (or game engines) for the web, you have some code you always end up using. `gamebox` aims to provide that base code.
 
+
 What does it provide?
 ---------------------
 * Loop (utilizing `requestAnimationFrame`)
