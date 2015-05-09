@@ -1,7 +1,7 @@
 'use strict';
 
 import EventMap from 'eventmap';
-import BezierEasing from './bezier-easing';
+import BezierEasing from 'bezier-easing';
 import Loop from './loop';
 
 class Tween extends EventMap {
