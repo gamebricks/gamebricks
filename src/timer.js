@@ -5,6 +5,8 @@ import {performance} from 'animframe';
 
 class Timer extends EventMap {
   constructor(interval) {
+    super();
+
     this.interval = interval || 1000;
     this.startTime = -1;
 
