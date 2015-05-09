@@ -17,6 +17,8 @@ var imageTypes = {
 
 class AssetLoader extends EventMap {
   constructor(assets) {
+    super();
+
     this.assets = assets || {};
     this.files = {};
 
