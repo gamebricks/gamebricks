@@ -51,7 +51,6 @@ bower_components
 # Generated files #
 ###################
 tmp
-src/bezier-easing.js
 
 # Sublime #
 ###########
