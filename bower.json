@@ -23,11 +23,11 @@
     "tests"
   ],
   "dependencies": {
+    "bezier-easing": "~1.0.0",
     "eventmap": "~1.6.0",
     "animframe": "~2.0.0"
   },
   "devDependencies": {
-    "bezier-easing": "~1.0.0",
     "mocha": "~1.17.1",
     "chai": "~1.8.1"
   }
