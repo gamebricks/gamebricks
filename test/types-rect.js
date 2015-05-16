@@ -3,7 +3,7 @@
 import {Types} from 'gamebox';
 const {Rect, Vector2} = Types;
 
-describe('gambeox/types/rect', function () {
+describe('gamebox/types/rect', function () {
 
   it('is a function', function () {
     expect(Rect).to.be.a('function');
