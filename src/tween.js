@@ -6,6 +6,8 @@ import Loop from './loop';
 
 class Tween extends EventMap {
   constructor() {
+    super();
+
     this.target = null;
   }
 
