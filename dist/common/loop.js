@@ -30,7 +30,7 @@ var Loop = (function () {
     var time;
 
     (function loop() {
-      requestAnimationFrame(loop);
+      requestAnimationFrame.call(window, loop);
 
       var now = performance.now();
       var dt = now - (time || now);

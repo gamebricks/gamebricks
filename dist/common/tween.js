@@ -10,7 +10,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 var EventMap = _interopRequire(require("eventmap"));
 
-var BezierEasing = _interopRequire(require("./bezier-easing"));
+var BezierEasing = _interopRequire(require("bezier-easing"));
 
 var Loop = _interopRequire(require("./loop"));
 

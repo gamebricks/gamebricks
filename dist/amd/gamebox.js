@@ -5,6 +5,8 @@ define('gamebox/assetloader', ["exports", "module", "eventmap", "./log"], functi
 
   var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+  var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
   var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
   var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
@@ -28,6 +30,8 @@ define('gamebox/assetloader', ["exports", "module", "eventmap", "./log"], functi
   var AssetLoader = (function (_EventMap) {
     function AssetLoader(assets) {
       _classCallCheck(this, AssetLoader);
+
+      _get(Object.getPrototypeOf(AssetLoader.prototype), "constructor", this).call(this);
 
       this.assets = assets || {};
       this.files = {};
@@ -324,7 +328,7 @@ define('gamebox/loop', ["exports", "module", "animframe", "eventmap", "./timer"]
       var time;
 
       (function loop() {
-        requestAnimationFrame(loop);
+        requestAnimationFrame.call(window, loop);
 
         var now = performance.now();
         var dt = now - (time || now);
@@ -416,24 +420,21 @@ define('gamebox/loop', ["exports", "module", "animframe", "eventmap", "./timer"]
 define('gamebox/math/clamp', ["exports", "module"], function (exports, module) {
   "use strict";
 
-  // TODO: Make this pretties and more ES6-like
-  var clamp = function clamp(value, min, max) {
-    var _ref, _ref1, _ref2;
-    if (typeof value === "object") {
-      _ref = value, min = _ref.min, max = _ref.max, value = _ref.value;
-    }
-    if (Array.isArray(min)) {
-      _ref1 = min, min = _ref1[0], max = _ref1[1];
-    }
-    if (min == null) {
-      min = 0;
-    }
-    if (max == null) {
-      max = 1;
-    }
+  var _slicedToArray = function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; for (var _iterator = arr[Symbol.iterator](), _step; !(_step = _iterator.next()).done;) { _arr.push(_step.value); if (i && _arr.length === i) break; } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } };
+
+  var clamp = function clamp(value) {
+    var min = arguments[1] === undefined ? 0 : arguments[1];
+    var max = arguments[2] === undefined ? 1 : arguments[2];
+
     if (min > max) {
-      _ref2 = [max, min], min = _ref2[0], max = _ref2[1];
+      var _ref = [max, min];
+
+      var _ref2 = _slicedToArray(_ref, 2);
+
+      min = _ref2[0];
+      max = _ref2[1];
     }
+
     if (min <= value && value <= max) {
       return value;
     } else {
@@ -443,6 +444,24 @@ define('gamebox/math/clamp', ["exports", "module"], function (exports, module) {
         return min;
       }
     }
+  };
+
+  clamp.array = function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 3);
+
+    var value = _ref2[0];
+    var min = _ref2[1];
+    var max = _ref2[2];
+
+    return clamp(value, min, max);
+  };
+
+  clamp.obj = function (_ref) {
+    var value = _ref.value;
+    var min = _ref.min;
+    var max = _ref.max;
+
+    return clamp(value, min, max);
   };
 
   module.exports = clamp;
@@ -500,6 +519,8 @@ define('gamebox/timer', ["exports", "module", "eventmap", "animframe"], function
 
   var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+  var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
   var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
   var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
@@ -513,6 +534,8 @@ define('gamebox/timer', ["exports", "module", "eventmap", "animframe"], function
       var _this = this;
 
       _classCallCheck(this, Timer);
+
+      _get(Object.getPrototypeOf(Timer.prototype), "constructor", this).call(this);
 
       this.interval = interval || 1000;
       this.startTime = -1;
@@ -582,7 +605,7 @@ define('gamebox/timer', ["exports", "module", "eventmap", "animframe"], function
 
   module.exports = Timer;
 });
-define('gamebox/tween', ["exports", "module", "eventmap", "./bezier-easing", "./loop"], function (exports, module, _eventmap, _bezierEasing, _loop) {
+define('gamebox/tween', ["exports", "module", "eventmap", "bezier-easing", "./loop"], function (exports, module, _eventmap, _bezierEasing, _loop) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
