@@ -1,29 +1,38 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
-"use strict";
 
-var Color = _interopRequire(require("./color"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Vector2 = _interopRequire(require("./vector2"));
+var _color = require('./color');
 
-var Vector3 = _interopRequire(require("./vector3"));
+var _color2 = _interopRequireDefault(_color);
 
-var Rect = _interopRequire(require("./rect"));
+var _vector2 = require('./vector2');
+
+var _vector22 = _interopRequireDefault(_vector2);
+
+var _vector3 = require('./vector3');
+
+var _vector32 = _interopRequireDefault(_vector3);
+
+var _rect = require('./rect');
+
+var _rect2 = _interopRequireDefault(_rect);
+
+'use strict';
 
 var Types = {};
 
-Types.Color = Color;
-Types.Vector2 = Vector2;
-Types.Vector3 = Vector3;
-Types.Rect = Rect;
+Types.Color = _color2['default'];
+Types.Vector2 = _vector22['default'];
+Types.Vector3 = _vector32['default'];
+Types.Rect = _rect2['default'];
 
-exports["default"] = Types;
-exports.Color = Color;
-exports.Vector2 = Vector2;
-exports.Vector3 = Vector3;
-exports.Rect = Rect;
+exports['default'] = Types;
+exports.Color = _color2['default'];
+exports.Vector2 = _vector22['default'];
+exports.Vector3 = _vector32['default'];
+exports.Rect = _rect2['default'];

@@ -1,12 +1,20 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 
-var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Vector2 = _interopRequire(require("./vector2"));
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _vector2 = require('./vector2');
+
+var _vector22 = _interopRequireDefault(_vector2);
+
+'use strict';
 
 var Rect = (function () {
   function Rect() {
@@ -23,43 +31,42 @@ var Rect = (function () {
     this.h = h;
   }
 
-  _createClass(Rect, {
-    clone: {
-      value: function clone() {
-        return new Rect({ x: this.x, y: this.y, w: this.w, h: this.h });
-      }
-    },
-    toJSON: {
-      value: function toJSON() {
-        return { x: this.x, y: this.y, w: this.w, h: this.h };
-      }
-    },
-    toString: {
-      value: function toString() {
-        return JSON.stringify(this.toJSON());
-      }
-    },
-    center: {
-      value: function center() {
-        return new Vector2(this.x + this.w / 2, this.y + this.h / 2);
-      }
-    },
-    contains: {
-      value: function contains(vector) {
-        return vector.x >= this.x && vector.y >= this.y && vector.x < this.x + this.w && vector.y < this.y + this.h;
-      }
+  _createClass(Rect, [{
+    key: 'clone',
+    value: function clone() {
+      return new Rect({ x: this.x, y: this.y, w: this.w, h: this.h });
     }
   }, {
-    fromString: {
-      value: function fromString(str) {
-        var obj = JSON.parse(str);
-
-        return new Rect(obj.x, obj.y, obj.w, obj.h);
-      }
+    key: 'toJSON',
+    value: function toJSON() {
+      return { x: this.x, y: this.y, w: this.w, h: this.h };
     }
-  });
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return JSON.stringify(this.toJSON());
+    }
+  }, {
+    key: 'center',
+    value: function center() {
+      return new _vector22['default'](this.x + this.w / 2, this.y + this.h / 2);
+    }
+  }, {
+    key: 'contains',
+    value: function contains(vector) {
+      return vector.x >= this.x && vector.y >= this.y && vector.x < this.x + this.w && vector.y < this.y + this.h;
+    }
+  }], [{
+    key: 'fromString',
+    value: function fromString(str) {
+      var obj = JSON.parse(str);
+
+      return new Rect(obj.x, obj.y, obj.w, obj.h);
+    }
+  }]);
 
   return Rect;
 })();
 
-module.exports = Rect;
+exports['default'] = Rect;
+module.exports = exports['default'];

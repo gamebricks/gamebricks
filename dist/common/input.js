@@ -1,31 +1,42 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 
-var EventMap = _interopRequire(require("eventmap"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Key = _interopRequire(require("./key"));
+var _eventmap = require('eventmap');
+
+var _eventmap2 = _interopRequireDefault(_eventmap);
+
+var _key = require('./key');
+
+var _key2 = _interopRequireDefault(_key);
+
+'use strict';
 
 var Input = {};
 
-Input.Key = Key;
-Input.define = Key.define;
+Input.Key = _key2['default'];
+Input.define = _key2['default'].define;
 
 // TODO: Find a different name
-Input.key = new EventMap();
+Input.key = new _eventmap2['default']();
 
-window.addEventListener("keydown", function (evt) {
+window.addEventListener('keydown', function (evt) {
   Input.key.trigger({
-    name: "down",
-    context: Key
+    name: 'down',
+    context: _key2['default']
   }, evt.keyCode);
 }, true);
 
-window.addEventListener("keyup", function (evt) {
+window.addEventListener('keyup', function (evt) {
   Input.key.trigger({
-    name: "up",
-    context: Key
+    name: 'up',
+    context: _key2['default']
   }, evt.keyCode);
 }, true);
 
-module.exports = Input;
+exports['default'] = Input;
+module.exports = exports['default'];

@@ -1,17 +1,24 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 
-var _animframe = require("animframe");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var requestAnimationFrame = _animframe.requestAnimationFrame;
-var performance = _animframe.performance;
+var _animframe = require('animframe');
 
-var EventMap = _interopRequire(require("eventmap"));
+var _eventmap = require('eventmap');
 
-var Timer = _interopRequire(require("./timer"));
+var _eventmap2 = _interopRequireDefault(_eventmap);
 
-var loopEvents = new EventMap();
+var _timer = require('./timer');
+
+var _timer2 = _interopRequireDefault(_timer);
+
+'use strict';
+
+var loopEvents = new _eventmap2['default']();
 var pausedEvents = {};
 var timers = [];
 
@@ -30,9 +37,9 @@ var Loop = (function () {
     var time;
 
     (function loop() {
-      requestAnimationFrame.call(window, loop);
+      _animframe.requestAnimationFrame.call(window, loop);
 
-      var now = performance.now();
+      var now = _animframe.performance.now();
       var dt = now - (time || now);
 
       time = now;
@@ -95,7 +102,7 @@ var Loop = (function () {
   };
 
   var createTimer = function createTimer(interval) {
-    var timer = new Timer(interval);
+    var timer = new _timer2['default'](interval);
     timers.push(timer);
 
     return timer;
@@ -117,4 +124,5 @@ var Loop = (function () {
   };
 })();
 
-module.exports = Loop;
+exports['default'] = Loop;
+module.exports = exports['default'];

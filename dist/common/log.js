@@ -1,4 +1,9 @@
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+'use strict';
 
 /**
  * @class
@@ -43,16 +48,16 @@ var Log = (function () {
   Log.connector = Log.plugins.console;
 
   Log.logLevelMap = {
-    error: ["e"],
-    warn: ["w", "e"],
-    info: ["i", "w", "e"],
-    debug: ["d", "i", "w", "e"],
-    verbose: ["v", "d", "i", "w", "e"]
+    'error': ['e'],
+    'warn': ['w', 'e'],
+    'info': ['i', 'w', 'e'],
+    'debug': ['d', 'i', 'w', 'e'],
+    'verbose': ['v', 'd', 'i', 'w', 'e']
   };
 
-  Log.logLevel = "verbose";
+  Log.logLevel = 'verbose';
 
-  var logFunctions = ["v", "d", "i", "w", "e"];
+  var logFunctions = ['v', 'd', 'i', 'w', 'e'];
 
   for (var i = 0, j = logFunctions.length; i < j; i++) {
 
@@ -68,4 +73,5 @@ var Log = (function () {
   return Log;
 })();
 
-module.exports = Log;
+exports['default'] = Log;
+module.exports = exports['default'];

@@ -1,11 +1,20 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 
-var lerp = _interopRequire(require("./lerp"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lerp = require('./lerp');
+
+var _lerp2 = _interopRequireDefault(_lerp);
+
+'use strict';
 
 var inverseLerp = function inverseLerp(min, max, amt) {
-  return max - lerp(min, max, amt);
+  return max - _lerp2['default'](min, max, amt);
 };
 
-module.exports = inverseLerp;
+exports['default'] = inverseLerp;
+module.exports = exports['default'];
